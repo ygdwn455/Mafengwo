@@ -1,0 +1,46 @@
+﻿1. 创建scrapy项目
+scrapy startproject mafengwo
+
+2. 进入项目，使用scrapy自动创建爬虫
+cd mafengwo
+scrapy genspider tourist mafengwo.cn
+
+3.分析初始链接与后续链接
+具有所有国家信息的页面：http://www.mafengwo.cn/mdd/ # 获取所有国家
+                                                                    ### 具有所有城市的页面：http://www.mafengwo.cn/mdd/citylist/21536.html # 获取国家的所有城市列表
+具有所有景点列表的页面：http://www.mafengwo.cn/jd/21536/gonglve.html # 获取国家的所有景点列表 
+具体的景点信息页面：http://www.mafengwo.cn/poi/3474.html # 获取景点具体信息
+
+真正获取所有景点信息的url: http://www.mafengwo.cn/ajax/router.php 请求方法是post 参数是{'iMddid':国家代码, 'iPage':页码, 'iTagId':'0', 'sAct':'KMdd_StructWebAjax|GetPoisByTag'}
+
+
+
+目标: 获取中国中的所有景点
+
+需要中国所有景点所处的链接
+http://www.mafengwo.cn/jd/21536/gonglve.html，数字即为国家的代码，21536是中国
+但是该页面获取响应是没有景点数据的，分析可知景点的加载是在该链接
+http://www.mafengwo.cn/ajax/router.php
+post请求中，并需要参数
+iMddid:21536
+iPage:2
+iTagId:0
+sAct:KMdd_StructWebAjax|GetPoisByTag
+
+景点具体信息链接
+http://www.mafengwo.cn/poi/3474.html    # 数字即为景点的代码
+
+4. 根据需要保存的信息，编写items类
+
+5. 编写splider
+
+response.headers 获取到响应头
+response.headers.getlist('Set-Cookie') 获取cookies列表
+
+response.re('') 使用正则表达式进行匹配内容
+
+html
+response.css('') 使用css进行选择内容
+response.xpath('') 使用xpath选择内容
+
+

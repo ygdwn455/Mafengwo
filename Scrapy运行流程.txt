@@ -1,0 +1,38 @@
+Scrapy运行流程大概如下：
+
+1、 引擎从调度器中取出一个链接(URL)用于接下来的抓取
+
+2、 引擎把URL封装成一个请求(Request)传给下载器
+
+3、 下载器把资源下载下来，并封装成应答包(Response)
+
+4、 爬虫解析Response
+
+5、 解析出实体（Item）,则交给实体管道进行进一步的处理
+
+6、 解析出的是链接（URL）,则把URL交给调度器等待抓取
+
+
+
+用Scrapy创建爬虫的流程如下：
+
+1.分析目标站点：网址、内容的元素选择器等。
+
+2.创建一个Scrapy项目：scrapy startproject links
+
+3.编写用来提取信息的Item      // 编写Item
+
+4.创建蜘蛛Spider：scrapy genspider 6080 www.6080.tv      // 编写Spider
+
+
+5.编写Item管道进行存储Item
+
+
+进入项目目录，运行命令
+
+scrapy crawl 爬虫名字 –nolog
+
+格式：scrapy crawl+爬虫名  –nolog即不显示日志
+
+
+在实际的爬取过程中，我们会遇到一些反爬虫机制，需要我们进行适当的反反爬技术。
